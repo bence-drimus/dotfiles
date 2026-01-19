@@ -1,4 +1,4 @@
-# BDrimus's Dotfiles
+# bence-drimus's Dotfiles
 
 ![Shell](https://img.shields.io/badge/Shell-Bash-blue)![OS](https://img.shields.io/badge/OS-Arch%20Linux-blueviolet)
 
@@ -13,7 +13,7 @@ This setup is specifically designed for **Arch Linux** and its derivatives (like
 You can install these dotfiles directly from this repository using the `curl` command below. This method downloads and executes the `install.sh` script without cloning the repository.
 
 ```bash
-curl -sS https://raw.githubusercontent.com/BDrimus/dotfiles/main/install.sh | bash
+curl -sS https://raw.githubusercontent.com/bence-drimus/dotfiles/main/install.sh | bash
 ```
 
 ## Usage
@@ -24,28 +24,28 @@ The installation script is designed to be flexible. You can choose to install ev
 
 *   **No options**: Installs both configuration files and the default packages from `pkglist.txt`.
     ```bash
-    curl -sS https://raw.githubusercontent.com/BDrimus/dotfiles/main/install.sh | bash
+    curl -sS https://raw.githubusercontent.com/bence-drimus/dotfiles/main/install.sh | bash
     ```
 
 *   `-c`, `--configs`: Installs only the configuration files.
     ```bash
-    curl -sS https://raw.githubusercontent.com/BDrimus/dotfiles/main/install.sh | bash -s -- -c
+    curl -sS https://raw.githubusercontent.com/bence-drimus/dotfiles/main/install.sh | bash -s -- -c
     ```
 
 *   `-p`, `--packages [type]`: Installs only the packages.
     *   If no `[type]` is specified, it installs packages from the default `pkglist.txt`.
         ```bash
-        curl -sS https://raw.githubusercontent.com/BDrimus/dotfiles/main/install.sh | bash -s -- -p
+        curl -sS https://raw.githubusercontent.com/bence-drimus/dotfiles/main/install.sh | bash -s -- -p
         ```
     *   You can specify a type (e.g., `laptop`, `desktop`) to install from a corresponding package list (e.g., `pkglist-laptop.txt`).
         ```bash
         # This requires a 'pkglist-laptop.txt' file in the repository
-        curl -sS https://raw.githubusercontent.com/BDrimus/dotfiles/main/install.sh | bash -s -- -p laptop
+        curl -sS https://raw.githubusercontent.com/bence-drimus/dotfiles/main/install.sh | bash -s -- -p laptop
         ```
 
 *   `-h`, `--help`: Displays the help message with all available options.
     ```bash
-    curl -sS https://raw.githubusercontent.com/BDrimus/dotfiles/main/install.sh | bash -s -- -h
+    curl -sS https://raw.githubusercontent.com/bence-drimus/dotfiles/main/install.sh | bash -s -- -h
     ```
 
 ## Repository Structure

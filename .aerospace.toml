@@ -1,0 +1,109 @@
+# Reference: https://github.com/i3/i3/blob/next/etc/config
+
+# i3 doesn't have "normalizations" feature that why we disable them here.
+# But the feature is very helpful.
+# Normalizations eliminate all sorts of weird tree configurations that don't make sense.
+# Give normalizations a chance and enable them back.
+enable-normalization-flatten-containers = false
+enable-normalization-opposite-orientation-for-nested-containers = false
+
+# Mouse follows focus when focused monitor changes
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+after-startup-command = [
+    # JankyBorders has a built-in detection of already running process,
+    # so it won't be run twice on AeroSpace restart
+    'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0',
+]
+
+[workspace-to-monitor-force-assignment]
+"一" = 'main'
+"二" = 'secondary'
+"三" = 'main'
+"四" = 'secondary'
+"五" = 'main'
+"六" = 'secondary'
+"七" = 'main'
+"八" = 'secondary'
+"九" = 'main'
+"十" = 'secondary'
+
+
+[mode.main.binding]
+cmd-h = []     # Disable "hide application"
+cmd-alt-h = [] # Disable "hide others"
+
+# Open a new alacritty window in home directory with Alt+Enter
+ctrl-alt-cmd-enter = '''exec-and-forget alacritty --working-directory ~'''
+ctrl-alt-cmd-t = '''exec-and-forget alacritty --working-directory ~ -e tmux'''
+
+# i3 wraps focus by default
+ctrl-alt-cmd-h = 'focus --boundaries-action wrap-around-the-workspace left'
+ctrl-alt-cmd-j = 'focus --boundaries-action wrap-around-the-workspace down'
+ctrl-alt-cmd-k = 'focus --boundaries-action wrap-around-the-workspace up'
+ctrl-alt-cmd-l = 'focus --boundaries-action wrap-around-the-workspace right'
+
+ctrl-alt-cmd-shift-h = 'move left'
+ctrl-alt-cmd-shift-j = 'move down'
+ctrl-alt-cmd-shift-k = 'move up'
+ctrl-alt-cmd-shift-l = 'move right'
+
+# Consider using 'join-with' command as a 'split' replacement if you want to enable
+# normalizations
+ctrl-alt-cmd-g = 'split horizontal'
+ctrl-alt-cmd-v = 'split vertical'
+
+ctrl-ctrl-alt-cmd-f = 'fullscreen'
+
+ctrl-alt-cmd-q = 'close'
+
+ctrl-alt-cmd-s = 'layout v_accordion'               # 'layout stacking' in i3
+ctrl-alt-cmd-w = 'layout h_accordion'               # 'layout tabbed' in i3
+ctrl-alt-cmd-e = 'layout tiles horizontal vertical' # 'layout toggle split' in i3
+
+ctrl-alt-cmd-shift-space = 'layout floating tiling' # 'floating toggle' in i3
+
+# Not supported, because this command is redundant in AeroSpace mental model.
+# See: https://nikitabobko.github.io/AeroSpace/guide#floating-windows
+#ctrl-alt-cmd-space = 'focus toggle_tiling_floating'
+
+# `focus parent`/`focus child` are not yet supported, and it's not clear whether they
+# should be supported at all https://github.com/nikitabobko/AeroSpace/issues/5
+# ctrl-alt-cmd-a = 'focus parent'
+
+# See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
+ctrl-alt-cmd-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+
+ctrl-alt-cmd-1 = 'workspace 一'
+ctrl-alt-cmd-2 = 'workspace 二'
+ctrl-alt-cmd-3 = 'workspace 三'
+ctrl-alt-cmd-4 = 'workspace 四'
+ctrl-alt-cmd-5 = 'workspace 五'
+ctrl-alt-cmd-6 = 'workspace 六'
+ctrl-alt-cmd-7 = 'workspace 七'
+ctrl-alt-cmd-8 = 'workspace 八'
+ctrl-alt-cmd-9 = 'workspace 九'
+ctrl-alt-cmd-0 = 'workspace 十'
+
+ctrl-alt-cmd-shift-1 = 'move-node-to-workspace 一'
+ctrl-alt-cmd-shift-2 = 'move-node-to-workspace 二'
+ctrl-alt-cmd-shift-3 = 'move-node-to-workspace 三'
+ctrl-alt-cmd-shift-4 = 'move-node-to-workspace 四'
+ctrl-alt-cmd-shift-5 = 'move-node-to-workspace 五'
+ctrl-alt-cmd-shift-6 = 'move-node-to-workspace 六'
+ctrl-alt-cmd-shift-7 = 'move-node-to-workspace 七'
+ctrl-alt-cmd-shift-8 = 'move-node-to-workspace 八'
+ctrl-alt-cmd-shift-9 = 'move-node-to-workspace 九'
+ctrl-alt-cmd-shift-0 = 'move-node-to-workspace 十'
+
+ctrl-alt-cmd-shift-c = 'reload-config'
+
+ctrl-alt-cmd-r = 'mode resize'
+
+[mode.resize.binding]
+h = 'resize width -50'
+j = 'resize height +50'
+k = 'resize height -50'
+l = 'resize width +50'
+enter = 'mode main'
+esc = 'mode main'

@@ -1,0 +1,95 @@
+{
+  "layer": "top",
+  "position": "bottom",
+  "height": 30,
+  "modules-left": ["sway/workspaces", "sway/window"],
+  "modules-center": ["clock"],
+  "modules-right": [
+    "network#wireless",
+    "network#ethernet",
+    "battery",
+    "disk",
+    "cpu",
+    "memory",
+    "pulseaudio",
+    "tray"
+  ],
+
+  // Network modules (wireless & ethernet)
+  "network#wireless": {
+    "interface": "wlan0*", // Adjust to your interface (e.g., wlan0)
+    "format": "{ifname}: {signalStrength}% {ipaddr}",
+    "format-disconnected": "W: down",
+    "tooltip-format": "{ifname}: {essid} ({signalStrength}%)"
+  },
+  "network#ethernet": {
+    "interface": "enp*", // Adjust to your interface (e.g., eth0)
+    "format": "E: {ipaddr} ({bandwidthDownBits})",
+    "format-disconnected": "E: down",
+    "tooltip-format": "{ifname}: {ipaddr}"
+  },
+
+  // Battery
+  "battery": {
+    "states": {
+      "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{capacity}% {icon}",
+    "format-charging": "{capacity}% ",
+    "format-plugged": "{capacity}% ",
+    "format-icons": ["", "", "", "", ""]
+  },
+
+  // Disk
+  "disk": {
+    "path": "/",
+    "format": "{used} / {total} GB"
+  },
+
+  // CPU (replaces 'load')
+  "cpu": {
+    "format": " {usage}%",
+    "tooltip": false
+  },
+
+  // Memory
+  "memory": {
+    "format": " {}%",
+    "tooltip-format": "{used:0.1f}GB / {total:0.1f}GB used"
+  },
+
+  // Volume (PulseAudio)
+  "pulseaudio": {
+    "format": "♪ {volume}%",
+    "format-muted": "♪ muted",
+    "on-click": "pavucontrol"
+  },
+
+  // Clock (replaces 'tztime local')
+  "clock": {
+    "format": "{:%A, %Y-%m-%d %H:%M:%S}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+  },
+
+  // Sway workspaces (optional, for window management)
+  "sway/workspaces": {
+    "disable-scroll": true,
+    "format": "{name}: {icon}",
+    "format-icons": {
+      "1": "",
+      "2": "",
+      "3": "",
+      "4": "",
+      "5": "",
+      "urgent": "",
+      "focused": "",
+      "default": ""
+    }
+  },
+  "tray": {
+    "icon-size": 21,
+    "spacing": 10
+  }
+}

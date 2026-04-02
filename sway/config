@@ -14,6 +14,7 @@ input * {
     xkb_layout "us,gb,ru"
     xkb_variant ",,phonetic_mac"
     xkb_options "grp:alt_shift_toggle"
+    scroll_factor 0.25
 }
 
 # --- Output Configuration ---
@@ -65,6 +66,11 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+# Screenshot keybinds (requires grimshot from sway-contrib)
+bindsym Print exec grimshot copy active
+bindsym Shift+Print exec grimshot copy area
+bindsym $mod+Print exec grimshot copy output
 
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod

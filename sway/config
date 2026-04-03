@@ -43,8 +43,7 @@ exec_always gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
 
 # Blue Light Filter
 # 'redshift' does not work on Wayland. Use 'wlsunset' or 'gammastep' instead.
-# If you install wlsunset, you can uncomment the line below:
-# exec --no-startup-id wlsunset -l 51.5 -L 0.1
+exec --no-startup-id wlsunset -l 51.5 -L 0.1 -T 6500:1500
 
 # XDG Autostart
 # 'dex' is an X11 tool. It's often better to launch apps directly or use a

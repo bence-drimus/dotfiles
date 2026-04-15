@@ -12,6 +12,7 @@
     "cpu",
     "memory",
     "pulseaudio",
+    "backlight",
     "tray"
   ],
 
@@ -65,6 +66,11 @@
     "format": "♪ {volume}%",
     "format-muted": "♪ muted",
     "on-click": "pavucontrol"
+  },
+
+  // Backlight
+  "backlight": {
+    "format": " {percent}%"
   },
 
   // Clock (replaces 'tztime local')

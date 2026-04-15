@@ -29,7 +29,7 @@ window#waybar.hidden {
   border-bottom: 3px solid #d8dee9;
 }
 
-#clock, #battery, #cpu, #memory, #disk, #network, #pulseaudio, #tray {
+#clock, #battery, #cpu, #memory, #disk, #network, #pulseaudio, #backlight, #tray {
   padding: 0 10px;
   margin: 0 4px;
   background: transparent;

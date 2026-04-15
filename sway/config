@@ -30,10 +30,10 @@ exec --no-startup-id nm-applet --indicator
 # Idle configuration (Replaces xss-lock)
 # This locks the screen after 300 seconds (5 min) of inactivity.
 exec --no-startup-id swayidle -w \
-    timeout 300 'swaylock -f' \
+    timeout 300 'swaylock -f --color 000000' \
     timeout 600 'swaymsg "output * dpms off"' \
     resume 'swaymsg "output * dpms on"' \
-    before-sleep 'swaylock -f'
+    before-sleep 'swaylock -f --color 000000'
 
 exec_always {
     export GTK_THEME="Adwaita:dark"

@@ -1,0 +1,12 @@
+#!/bin/sh
+# Open new Ghostty window running tmux. Warm path via cmd+N + typed `tmux`.
+if pgrep -xi ghostty > /dev/null 2>&1; then
+  osascript \
+    -e 'tell application "Ghostty" to activate' \
+    -e 'tell application "System Events" to keystroke "n" using command down' \
+    -e 'delay 0.25' \
+    -e 'tell application "System Events" to keystroke "tmux"' \
+    -e 'tell application "System Events" to key code 36'
+else
+  open -a Ghostty --args --working-directory="$HOME" -e tmux
+fi

@@ -34,8 +34,8 @@ cmd-h = []     # Disable "hide application"
 cmd-alt-h = [] # Disable "hide others"
 
 # Open a new ghostty window in home directory with Alt+Enter
-ctrl-alt-cmd-enter = '''exec-and-forget ghostty --working-directory=~'''
-ctrl-alt-cmd-t = '''exec-and-forget ghostty --working-directory=~ -e tmux'''
+ctrl-alt-cmd-enter = '''exec-and-forget $HOME/.local/bin/ghostty-new-window'''
+ctrl-alt-cmd-t = '''exec-and-forget $HOME/.local/bin/ghostty-new-tmux'''
 
 # i3 wraps focus by default
 ctrl-alt-cmd-h = 'focus --boundaries-action wrap-around-the-workspace left'

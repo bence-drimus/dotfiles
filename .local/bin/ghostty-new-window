@@ -1,0 +1,10 @@
+#!/bin/sh
+# Open new Ghostty window. If app running, reuse via cmd+N (warm).
+# Else cold-launch with home dir.
+if pgrep -xi ghostty > /dev/null 2>&1; then
+  osascript \
+    -e 'tell application "Ghostty" to activate' \
+    -e 'tell application "System Events" to keystroke "n" using command down'
+else
+  open -a Ghostty --args --working-directory="$HOME"
+fi

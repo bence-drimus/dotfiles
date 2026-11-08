@@ -73,7 +73,7 @@ end)
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
 -- Electron menu bars (e.g. YouTube Music) ignore gsettings and only follow this
-hl.env("GTK_THEME", "Adwaita:dark")
+hl.env("GTK_THEME", "Colloid-Orange-Dark-Gruvbox")
 
 
 -----------------------

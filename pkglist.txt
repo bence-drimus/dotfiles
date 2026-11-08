@@ -10,3 +10,13 @@ wget
 
 zed
 obsidian
+
+# --- Fonts ---
+otf-font-awesome
+noto-fonts-cjk
+noto-fonts-emoji
+
+# --- Screenshots (Hyprland Print binds) ---
+grim
+slurp
+wl-clipboard

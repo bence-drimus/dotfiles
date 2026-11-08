@@ -1,4 +1,5 @@
-@import "colours.css";
+/* full path: wofi loads this as text, so a relative import would resolve against its working folder */
+@import url("file:///home/bence/.config/wofi/colours.css");
 
 /* Spotlight-style launcher in Gruvbox colours */
 * {

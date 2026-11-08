@@ -20,3 +20,9 @@ noto-fonts-emoji
 grim
 slurp
 wl-clipboard
+
+# --- Theme (Gruvbox, macOS-style, day/night) ---
+inter-font
+hyprsunset
+darkman
+# From the AUR, install with: paru -S colloid-gruvbox-gtk-theme-git whitesur-icon-theme apple_cursor

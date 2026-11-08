@@ -54,6 +54,14 @@ install_configs() {
     gsettings set org.gnome.desktop.interface cursor-theme 'macOS'
     gsettings set org.gnome.desktop.interface font-name 'Inter 11'
     print_success "Dark theme set."
+
+    # Day/night theme: darkman runs darkman/theme at sunrise and sunset (expects this repo at ~/Prog/dotfiles)
+    for mode in light dark; do
+        mkdir -p "$HOME/.local/share/$mode-mode.d"
+        ln -sfn "$HOME/Prog/dotfiles/darkman/theme" "$HOME/.local/share/$mode-mode.d/theme"
+    done
+    systemctl --user add-wants graphical-session.target darkman.service
+    print_success "Day/night theme set."
 }
 
 # Function to install packages

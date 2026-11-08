@@ -1,11 +1,13 @@
+@import "colours.css";
+
 /* Spotlight-style launcher in Gruvbox colours */
 * {
     font-family: "Inter", "Adwaita Sans", sans-serif;
 }
 
 window {
-    background-color: rgba(40, 40, 40, 0.85);
-    border: 1px solid rgba(235, 219, 178, 0.15);
+    background-color: alpha(@bg, 0.85);
+    border: 1px solid alpha(@fg, 0.15);
     border-radius: 14px;
 }
 
@@ -18,8 +20,8 @@ window {
     margin-bottom: 8px;
     border: none;
     border-radius: 10px;
-    background-color: rgba(60, 56, 54, 0.8);
-    color: #ebdbb2;
+    background-color: alpha(@surface, 0.8);
+    color: @fg;
     font-size: 20px;
 }
 
@@ -34,14 +36,14 @@ window {
 
 #text {
     margin-left: 8px;
-    color: #ebdbb2;
+    color: @fg;
     font-size: 15px;
 }
 
 #entry:selected {
-    background-color: rgba(214, 93, 14, 0.85);
+    background-color: alpha(@accent, 0.85);
 }
 
 #entry:selected #text {
-    color: #fbf1c7;
+    color: @on_accent;
 }

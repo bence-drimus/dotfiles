@@ -1,0 +1,6 @@
+# London; switches to light at sunrise and dark at sunset
+lat: 51.5
+lng: -0.13
+usegeoclue: false
+# xdg-desktop-portal-gtk already passes color-scheme on from gsettings
+portal: false

@@ -1,0 +1,32 @@
+#!/bin/sh
+# Switches the desktop between Gruvbox light and dark. darkman runs this at sunrise,
+# sunset and login; it is linked into both light-mode.d and dark-mode.d, and the
+# folder it is run from says which mode.
+case "$0" in
+    *dark-mode.d*) mode=dark;  gtk=Colloid-Orange-Dark-Gruvbox ;;
+    *)             mode=light; gtk=Colloid-Orange-Light-Gruvbox ;;
+esac
+
+# GTK, icons, and anything that follows the portal (browsers, Electron, kitty)
+gsettings set org.gnome.desktop.interface color-scheme "prefer-$mode"
+gsettings set org.gnome.desktop.interface gtk-theme "$gtk"
+gsettings set org.gnome.desktop.interface icon-theme "WhiteSur-$mode"
+# libadwaita apps only read ~/.config/gtk-4.0, and only when they start
+for f in gtk.css gtk-dark.css assets; do
+    ln -sfn "/usr/share/themes/$gtk/gtk-4.0/$f" "$HOME/.config/gtk-4.0/$f"
+done
+
+for app in waybar wofi; do
+    ln -sfn "$HOME/Prog/dotfiles/theme/colours-$mode.css" "$HOME/.config/$app/colours.css"
+done
+pkill -USR2 -x waybar
+
+# hyprland.lua reads color-scheme to pick its background colour
+hyprctl reload >/dev/null
+
+# Blue light filter only at night; started through Hyprland so it outlives this script
+pkill -x hyprsunset
+# a new one quits if the old one has not finished closing
+while pgrep -x hyprsunset >/dev/null; do sleep 0.1; done
+[ "$mode" = dark ] && hyprctl dispatch 'hl.dsp.exec_cmd("hyprsunset -t 4000")' >/dev/null
+exit 0

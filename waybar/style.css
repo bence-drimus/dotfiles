@@ -1,3 +1,5 @@
+@import "colours.css";
+
 /* macOS-style menu bar in Gruvbox colours: translucent, text only, no coloured blocks */
 * {
     /* `otf-font-awesome` is required to be installed for icons */
@@ -10,8 +12,8 @@
 }
 
 window#waybar {
-    background-color: rgba(40, 40, 40, 0.7);
-    color: #ebdbb2;
+    background-color: alpha(@bg, 0.7);
+    color: @fg;
 }
 
 window#waybar.hidden {
@@ -19,13 +21,13 @@ window#waybar.hidden {
 }
 
 tooltip {
-    background-color: rgba(40, 40, 40, 0.95);
-    border: 1px solid #504945;
+    background-color: alpha(@bg, 0.95);
+    border: 1px solid @border;
     border-radius: 8px;
 }
 
 tooltip label {
-    color: #ebdbb2;
+    color: @fg;
 }
 
 button {
@@ -33,7 +35,7 @@ button {
 }
 
 button:hover {
-    background: rgba(235, 219, 178, 0.1);
+    background: alpha(@fg, 0.1);
 }
 
 #workspaces {
@@ -45,16 +47,16 @@ button:hover {
     margin: 4px 1px;
     border-radius: 6px;
     background-color: transparent;
-    color: #a89984;
+    color: @fg_dim;
 }
 
 #workspaces button.active {
-    background-color: rgba(214, 93, 14, 0.85);
-    color: #fbf1c7;
+    background-color: alpha(@accent, 0.85);
+    color: @on_accent;
 }
 
 #workspaces button.urgent {
-    color: #fb4934;
+    color: @red;
 }
 
 #window,
@@ -82,7 +84,7 @@ button:hover {
 #idle_inhibitor,
 #power-profiles-daemon {
     padding: 0 8px;
-    color: #ebdbb2;
+    color: @fg;
     background-color: transparent;
 }
 
@@ -97,26 +99,26 @@ button:hover {
 #battery.charging,
 #battery.plugged,
 #power-profiles-daemon.power-saver {
-    color: #b8bb26;
+    color: @green;
 }
 
 #battery.warning:not(.charging),
 #idle_inhibitor.activated,
 #power-profiles-daemon.performance {
-    color: #fe8019;
+    color: @orange;
 }
 
 #battery.critical:not(.charging),
 #network.disconnected,
 #temperature.critical {
-    color: #fb4934;
+    color: @red;
 }
 
 #pulseaudio.muted,
 #wireplumber.muted,
 #bluetooth.off,
 #bluetooth.disabled {
-    color: #928374;
+    color: @grey;
 }
 
 #tray > .passive {
@@ -129,5 +131,5 @@ button:hover {
 
 #privacy-item {
     padding: 0 5px;
-    color: #fe8019;
+    color: @orange;
 }

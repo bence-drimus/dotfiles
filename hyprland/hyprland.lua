@@ -56,7 +56,6 @@ local menu = "wofi --show drun"
 hl.on("hyprland.start", function ()
     hl.exec_cmd("hyprpolkit PUT_YOUR_FLAGS_HERE")  -- <-- Replace PUT_YOUR_FLAGS_HERE with your actual flags
     hl.exec_cmd("waybar &")
-    hl.exec_cmd("hyprsunset")  -- blue light filter, schedule in hyprsunset.conf
     -- systemctl --user enable --now hyprpolkitagent.service
 end)
     -- hl.exec_cmd(terminal)
@@ -73,8 +72,6 @@ end)
 hl.env("XCURSOR_THEME", "macOS")
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
--- Electron menu bars (e.g. YouTube Music) ignore gsettings and only follow this
-hl.env("GTK_THEME", "Colloid-Orange-Dark-Gruvbox")
 
 
 -----------------------
@@ -222,11 +219,16 @@ hl.config({
 ----  MISC  ----
 ----------------
 
+-- darkman's theme script sets color-scheme and reloads Hyprland at sunrise and sunset
+local scheme = io.popen("gsettings get org.gnome.desktop.interface color-scheme")
+local light = scheme:read("a"):find("light") ~= nil
+scheme:close()
+
 hl.config({
     misc = {
         force_default_wallpaper = 0,
         disable_hyprland_logo   = true,
-        background_color        = 0xff282828, -- Gruvbox bg, shown since there is no wallpaper
+        background_color        = light and 0xfffbf1c7 or 0xff282828, -- Gruvbox bg, shown since there is no wallpaper
     },
 })
 

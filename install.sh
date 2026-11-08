@@ -45,6 +45,11 @@ install_configs() {
         print_error "Failed to download i3status config."
         return 1
     fi
+
+    # Dark theme for GTK and Electron apps (stored in dconf, so not a file here)
+    gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+    gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
+    print_success "Dark theme set."
 }
 
 # Function to install packages

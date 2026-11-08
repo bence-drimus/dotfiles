@@ -56,6 +56,7 @@ local menu = "wofi --show drun"
 hl.on("hyprland.start", function ()
     hl.exec_cmd("hyprpolkit PUT_YOUR_FLAGS_HERE")  -- <-- Replace PUT_YOUR_FLAGS_HERE with your actual flags
     hl.exec_cmd("waybar &")
+    hl.exec_cmd("hyprsunset")  -- blue light filter, schedule in hyprsunset.conf
     -- systemctl --user enable --now hyprpolkitagent.service
 end)
     -- hl.exec_cmd(terminal)

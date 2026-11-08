@@ -50,6 +50,9 @@ install_configs() {
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
     gsettings set org.gnome.desktop.interface accent-color 'orange'
     gsettings set org.gnome.desktop.interface gtk-theme 'Colloid-Orange-Dark-Gruvbox'
+    gsettings set org.gnome.desktop.interface icon-theme 'WhiteSur-dark'
+    gsettings set org.gnome.desktop.interface cursor-theme 'macOS'
+    gsettings set org.gnome.desktop.interface font-name 'Inter 11'
     print_success "Dark theme set."
 }
 

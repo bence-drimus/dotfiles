@@ -107,8 +107,8 @@ hl.config({
         border_size = 2,
 
         col = {
-            active_border   = { colors = {"rgba(33ccffee)", "rgba(00ff99ee)"}, angle = 45 },
-            inactive_border = "rgba(595959aa)",
+            active_border   = { colors = {"rgba(fe8019ee)", "rgba(fabd2fee)"}, angle = 45 },
+            inactive_border = "rgba(504945aa)",
         },
 
         -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
@@ -221,8 +221,9 @@ hl.config({
 
 hl.config({
     misc = {
-        force_default_wallpaper = -1,    -- Set to 0 or 1 to disable the anime mascot wallpapers
-        disable_hyprland_logo   = false, -- If true disables the random hyprland logo / anime girl background. :(
+        force_default_wallpaper = 0,
+        disable_hyprland_logo   = true,
+        background_color        = 0xff282828, -- Gruvbox bg, shown since there is no wallpaper
     },
 })
 
@@ -298,7 +299,14 @@ hl.bind(mainMod .. " + E", function()
     hl.dispatch(active.group and hl.dsp.group.toggle() or hl.dsp.layout("togglesplit"))
 end)
 hl.config({ binds = { movefocus_cycles_groupfirst = true } })  -- focus keys walk tabs first
-hl.config({ group = { groupbar = { font_size = 10, height = 18 } } })  -- bigger tab titles
+hl.config({ group = {
+    col = { border_active = "rgba(fe8019ee)", border_inactive = "rgba(504945aa)" },
+    groupbar = {
+        font_size = 10, height = 18,  -- bigger tab titles
+        text_color = "rgba(ebdbb2ff)",
+        col = { active = "rgba(d65d0eee)", inactive = "rgba(3c3836ee)" },
+    },
+} })
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))  -- like i3 $mod+f
 
 -- Move focus with mainMod + arrow keys

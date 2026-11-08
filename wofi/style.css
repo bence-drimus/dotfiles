@@ -1,0 +1,28 @@
+window {
+    background-color: #282828;
+    border: 2px solid #d65d0e;
+    border-radius: 10px;
+}
+
+#input {
+    margin: 8px;
+    border: none;
+    background-color: #3c3836;
+    color: #ebdbb2;
+}
+
+#inner-box, #outer-box, #scroll {
+    background-color: transparent;
+}
+
+#text {
+    color: #ebdbb2;
+}
+
+#entry:selected {
+    background-color: #d65d0e;
+}
+
+#entry:selected #text {
+    color: #282828;
+}

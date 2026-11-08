@@ -48,6 +48,7 @@ install_configs() {
 
     # Dark theme for GTK and Electron apps (stored in dconf, so not a file here)
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+    gsettings set org.gnome.desktop.interface accent-color 'orange'
     gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
     print_success "Dark theme set."
 }

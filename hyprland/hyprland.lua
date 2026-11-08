@@ -105,11 +105,11 @@ hl.config({
         gaps_in  = 5,
         gaps_out = 20,
 
-        border_size = 2,
+        border_size = 1,
 
         col = {
-            active_border   = { colors = {"rgba(fe8019ee)", "rgba(fabd2fee)"}, angle = 45 },
-            inactive_border = "rgba(504945aa)",
+            active_border   = "rgba(d65d0e99)",
+            inactive_border = "rgba(50494566)",
         },
 
         -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
@@ -122,7 +122,7 @@ hl.config({
     },
 
     decoration = {
-        rounding       = 10,
+        rounding       = 12,
         rounding_power = 2,
 
         -- Change transparency of focused and unfocused windows
@@ -131,9 +131,10 @@ hl.config({
 
         shadow = {
             enabled      = true,
-            range        = 4,
-            render_power = 3,
-            color        = 0xee1a1a1a,
+            range          = 24,  -- soft macOS-style shadow
+            render_power   = 3,
+            color          = 0x66000000,
+            color_inactive = 0x33000000,
         },
 
         blur = {
@@ -280,6 +281,7 @@ hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(menu))
+hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(menu))  -- like Spotlight
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 -- Like i3 layout tabbed: tab every tiled window on the workspace
 hl.bind(mainMod .. " + W", function()
@@ -400,6 +402,11 @@ hl.window_rule({
 
     no_focus = true,
 })
+
+-- Frosted glass behind the bar and launcher
+for _, ns in ipairs({ "waybar", "wofi" }) do
+    hl.layer_rule({ name = "blur-" .. ns, match = { namespace = "^" .. ns .. "$" }, blur = true, ignore_alpha = 0.1 })
+end
 
 -- Layer rules also return a handle.
 -- local overlayLayerRule = hl.layer_rule({

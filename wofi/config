@@ -1,0 +1,9 @@
+width=640
+height=400
+location=center
+prompt=Search
+insensitive=true
+allow_images=true
+image_size=24
+hide_scroll=true
+no_actions=true

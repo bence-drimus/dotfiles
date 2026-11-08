@@ -1,28 +1,47 @@
+/* Spotlight-style launcher in Gruvbox colours */
+* {
+    font-family: "Inter", "Adwaita Sans", sans-serif;
+}
+
 window {
-    background-color: #282828;
-    border: 2px solid #d65d0e;
-    border-radius: 10px;
+    background-color: rgba(40, 40, 40, 0.85);
+    border: 1px solid rgba(235, 219, 178, 0.15);
+    border-radius: 14px;
+}
+
+#outer-box {
+    padding: 10px;
 }
 
 #input {
-    margin: 8px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
     border: none;
-    background-color: #3c3836;
+    border-radius: 10px;
+    background-color: rgba(60, 56, 54, 0.8);
     color: #ebdbb2;
+    font-size: 20px;
 }
 
-#inner-box, #outer-box, #scroll {
+#inner-box, #scroll {
     background-color: transparent;
 }
 
+#entry {
+    padding: 6px 10px;
+    border-radius: 8px;
+}
+
 #text {
+    margin-left: 8px;
     color: #ebdbb2;
+    font-size: 15px;
 }
 
 #entry:selected {
-    background-color: #d65d0e;
+    background-color: rgba(214, 93, 14, 0.85);
 }
 
 #entry:selected #text {
-    color: #282828;
+    color: #fbf1c7;
 }

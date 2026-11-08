@@ -110,6 +110,7 @@
     },
     "clock": {
         // "timezone": "America/New_York",
+        "format": "{:%a %-d %b  %H:%M}", // macOS style, e.g. Sun 8 Nov  22:14
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%Y-%m-%d}"
     },

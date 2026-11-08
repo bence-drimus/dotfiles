@@ -84,8 +84,55 @@ button:hover {
 #idle_inhibitor,
 #power-profiles-daemon {
     padding: 0 8px;
+    margin: 4px 1px;
+    border-radius: 6px;
     color: @fg;
     background-color: transparent;
+}
+
+#submap:hover,
+#clock:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#disk:hover,
+#temperature:hover,
+#backlight:hover,
+#network:hover,
+#bluetooth:hover,
+#pulseaudio:hover,
+#wireplumber:hover,
+#custom-media-now:hover,
+#custom-media-prev:hover,
+#custom-media-next:hover,
+#custom-power:hover,
+#tray:hover,
+#idle_inhibitor:hover,
+#power-profiles-daemon:hover {
+    background-color: alpha(@fg, 0.1);
+}
+
+/* Menus from the tray and modules: the * reset above would otherwise square them off */
+.csd.popup decoration,
+menu {
+    border-radius: 10px;
+}
+
+menu {
+    padding: 4px;
+    background-color: @bg;
+    border: 1px solid @border;
+}
+
+menuitem {
+    padding: 4px 10px;
+    border-radius: 6px;
+    color: @fg;
+}
+
+menuitem:hover {
+    background-color: alpha(@accent, 0.85);
+    color: @on_accent;
 }
 
 #custom-power {

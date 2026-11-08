@@ -2,7 +2,7 @@
 """Waybar now-playing: "artist - title" of the last-active player, in a fixed-width box that scrolls when it doesn't fit."""
 import html, json, os, subprocess, threading, time
 
-WIDTH = 15  # characters; the CSS gives the module a monospace font so this is a fixed width on screen
+WIDTH = 20  # characters; the CSS gives the module a fixed min-width to hold it steady on screen
 GAP = "   •   "
 TICK = 0.3  # seconds per scroll step
 

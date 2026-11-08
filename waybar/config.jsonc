@@ -213,6 +213,7 @@
         "restart-interval": 5,
         "return-type": "json",
         "format": "{icon} {text}",
+        "align": 0, // left-align in the fixed-width box so the play/pause icon stays put while the text scrolls
         "hide-empty-text": true,
         "format-icons": {
             "Playing": "\uf04b",

@@ -140,7 +140,8 @@ menuitem:hover {
 }
 
 #custom-media-now {
-    font-family: monospace;
+    /* fixed width so the scrolling 20-character window (media.py) does not resize the bar */
+    min-width: 150px;
 }
 
 #battery.charging,

@@ -228,7 +228,7 @@ hl.config({
     misc = {
         force_default_wallpaper = 0,
         disable_hyprland_logo   = true,
-        background_color        = light and 0xfffaf4ed or 0xff282828, -- desktop colour, shown since there is no wallpaper
+        background_color        = light and 0xffe6e6e6 or 0xff282828, -- desktop colour, shown since there is no wallpaper
     },
 })
 
@@ -340,7 +340,7 @@ hl.config({ group = {
     col = { border_active = "rgba(fe8019ee)", border_inactive = "rgba(504945aa)" },
     groupbar = {
         font_size = 10, height = 18,  -- bigger tab titles
-        text_color = "rgba(ebdbb2ff)",
+        text_color = light and "rgba(323236ff)" or "rgba(ebdbb2ff)",  -- tab titles sit on the desktop colour
         col = { active = "rgba(d65d0eee)", inactive = "rgba(3c3836ee)" },
     },
 } })

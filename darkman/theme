@@ -1,19 +1,28 @@
 #!/bin/sh
-# Switches the desktop between Gruvbox light and dark. darkman runs this at sunrise,
-# sunset and login; it is linked into both light-mode.d and dark-mode.d, and the
-# folder it is run from says which mode.
+# Switches the desktop between a neutral light mode (matching how most apps look) and
+# Gruvbox dark. darkman runs this at sunrise, sunset and login; it is linked into both
+# light-mode.d and dark-mode.d, and the folder it is run from says which mode.
 case "$0" in
     *dark-mode.d*) mode=dark;  gtk=Colloid-Orange-Dark-Gruvbox ;;
-    *)             mode=light; gtk=Colloid-Orange-Light-Gruvbox ;;
+    *)             mode=light; gtk=adw-gtk3 ;;
 esac
+sun=$mode  # the blue light filter always follows the sun
+
+DARK_ONLY=0  # set to 1 to stay dark all day
+[ "$DARK_ONLY" = 1 ] && mode=dark gtk=Colloid-Orange-Dark-Gruvbox
 
 # GTK, icons, and anything that follows the portal (browsers, Electron, kitty)
 gsettings set org.gnome.desktop.interface color-scheme "prefer-$mode"
 gsettings set org.gnome.desktop.interface gtk-theme "$gtk"
 gsettings set org.gnome.desktop.interface icon-theme "WhiteSur-$mode"
-# libadwaita apps only read ~/.config/gtk-4.0, and only when they start
+# libadwaita apps only read ~/.config/gtk-4.0, and only when they start; in light mode
+# they keep their own look, which adw-gtk3 copies for GTK3 apps
 for f in gtk.css gtk-dark.css assets; do
-    ln -sfn "/usr/share/themes/$gtk/gtk-4.0/$f" "$HOME/.config/gtk-4.0/$f"
+    if [ "$mode" = dark ]; then
+        ln -sfn "/usr/share/themes/$gtk/gtk-4.0/$f" "$HOME/.config/gtk-4.0/$f"
+    else
+        rm -f "$HOME/.config/gtk-4.0/$f"
+    fi
 done
 
 for app in waybar wofi; do
@@ -28,5 +37,5 @@ hyprctl reload >/dev/null
 pkill -x hyprsunset
 # a new one quits if the old one has not finished closing
 while pgrep -x hyprsunset >/dev/null; do sleep 0.1; done
-[ "$mode" = dark ] && hyprctl dispatch 'hl.dsp.exec_cmd("hyprsunset -t 4000")' >/dev/null
+[ "$sun" = dark ] && hyprctl dispatch 'hl.dsp.exec_cmd("hyprsunset -t 4000")' >/dev/null
 exit 0

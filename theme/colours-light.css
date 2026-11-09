@@ -1,12 +1,13 @@
-/* Warm off-white light with Gruvbox ink, shared by waybar and wofi; darkman links colours.css to this or the dark one */
-@define-color bg #faf4ed;
-@define-color surface #f2e9e1;
-@define-color border #e4dcd2;
-@define-color fg #3c3836;
-@define-color fg_dim #7c6f64;
-@define-color grey #928374;
+/* Neutral light, matching libadwaita and most apps; shared by waybar and wofi.
+   darkman links colours.css to this or the dark one */
+@define-color bg #fafafa;
+@define-color surface #ebebed;
+@define-color border #deddda;
+@define-color fg #323236;
+@define-color fg_dim #77767b;
+@define-color grey #9a9996;
 @define-color accent #d65d0e;
-@define-color on_accent #fbf1c7;
-@define-color green #79740e;
-@define-color orange #af3a03;
-@define-color red #9d0006;
+@define-color on_accent #ffffff;
+@define-color green #26a269;
+@define-color orange #c64600;
+@define-color red #c01c28;

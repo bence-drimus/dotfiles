@@ -228,7 +228,7 @@ hl.config({
     misc = {
         force_default_wallpaper = 0,
         disable_hyprland_logo   = true,
-        background_color        = light and 0xfffbf1c7 or 0xff282828, -- Gruvbox bg, shown since there is no wallpaper
+        background_color        = light and 0xfffaf4ed or 0xff282828, -- desktop colour, shown since there is no wallpaper
     },
 })
 

@@ -286,23 +286,54 @@ hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(menu))  -- like Spotlight
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
--- Like i3 layout tabbed: tab every tiled window on the workspace
-hl.bind(mainMod .. " + W", function()
+-- Tiled windows on a workspace in screen order (left to right, then top to bottom)
+local function in_screen_order(workspace, keep)
+    local wins = {}
+    for _, w in ipairs(hl.get_workspace_windows(workspace)) do
+        if not w.floating and keep(w) then table.insert(wins, w) end
+    end
+    table.sort(wins, function(a, b)
+        if a.at.x ~= b.at.x then return a.at.x < b.at.x end
+        return a.at.y < b.at.y
+    end)
+    return wins
+end
+-- Like i3 layout tabbed: tab every tiled window on the workspace, in screen order
+local function tab_workspace()
     local active = hl.get_active_window()
     if not active or active.group then return end
+    local wins = in_screen_order(active.workspace, function(w) return not w.group end)
+    hl.dispatch(hl.dsp.focus({ window = wins[1] }))
     hl.dispatch(hl.dsp.group.toggle())
     local group = hl.get_active_window().group
     if not group then return end
-    for _, w in ipairs(hl.get_workspace_windows(active.workspace)) do
-        if w.address ~= active.address and not w.floating and not w.group then group:add(w) end
-    end
+    for i = 2, #wins do group:add(wins[i]) end
     hl.dispatch(hl.dsp.focus({ window = active })) -- keep the window you were on as the visible tab
-end)
+end
+-- Untab back into screen order matching the tab order
+local function untab_group(active)
+    local order, member = {}, {}
+    for _, w in ipairs(active.group.members) do
+        table.insert(order, w)
+        member[w.address] = true
+    end
+    hl.dispatch(hl.dsp.group.toggle())
+    -- where ungrouped windows land depends on focus and the cursor, so swap them into tab order
+    for i, want in ipairs(order) do
+        local now = in_screen_order(active.workspace, function(w) return member[w.address] end)[i]
+        if now and now.address ~= want.address then
+            hl.dispatch(hl.dsp.focus({ window = want }))
+            hl.dispatch(hl.dsp.window.swap({ target = "address:" .. now.address }))
+        end
+    end
+    hl.dispatch(hl.dsp.focus({ window = active }))
+end
+hl.bind(mainMod .. " + W", tab_workspace)
 -- Like i3 layout toggle split: untab the group, otherwise flip the split
 hl.bind(mainMod .. " + E", function()
     local active = hl.get_active_window()
     if not active then return end
-    hl.dispatch(active.group and hl.dsp.group.toggle() or hl.dsp.layout("togglesplit"))
+    if active.group then untab_group(active) else hl.dispatch(hl.dsp.layout("togglesplit")) end
 end)
 hl.config({ binds = { movefocus_cycles_groupfirst = true } })  -- focus keys walk tabs first
 hl.config({ group = {

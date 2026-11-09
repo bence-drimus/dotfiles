@@ -22,6 +22,7 @@ slurp
 wl-clipboard
 
 # --- Theme (Gruvbox, macOS-style, day/night) ---
+alacritty
 inter-font
 hyprsunset
 darkman

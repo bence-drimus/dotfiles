@@ -1,0 +1,8 @@
+# Colours follow the system light/dark mode: darkman's theme script links colours.toml
+# to colours-dark.toml or colours-light.toml, and alacritty reloads it live
+[general]
+import = ["~/.config/alacritty/colours.toml"]
+live_config_reload = true
+
+[window]
+padding = { x = 8, y = 6 }

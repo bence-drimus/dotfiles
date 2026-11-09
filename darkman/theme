@@ -30,6 +30,9 @@ for app in waybar wofi; do
 done
 pkill -USR2 -x waybar
 
+# alacritty watches its config and reloads the colours itself
+ln -sfn "$HOME/Prog/dotfiles/alacritty/colours-$mode.toml" "$HOME/.config/alacritty/colours.toml"
+
 # hyprland.lua reads color-scheme to pick its background colour
 hyprctl reload >/dev/null
 

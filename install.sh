@@ -58,6 +58,21 @@ install_configs() {
     ln -sfn "$HOME/Prog/dotfiles/hyprland/hyprlock-colours-dark.conf" "$CONFIG_DIR/hypr/hyprlock-colours.conf"
     print_success "Hyprland config installed."
 
+    # Notifications, linked into the repo like darkman; colours start dark and darkman switches them
+    mkdir -p "$CONFIG_DIR/dunst/dunstrc.d"
+    ln -sfn "$HOME/Prog/dotfiles/dunst/dunstrc" "$CONFIG_DIR/dunst/dunstrc"
+    ln -sfn "$HOME/Prog/dotfiles/dunst/colours-dark.conf" "$CONFIG_DIR/dunst/dunstrc.d/colours.conf"
+    print_success "dunst config installed."
+
+    # Vesktop rewrites its settings file, so it gets a copy rather than a link
+    mkdir -p "$CONFIG_DIR/vesktop"
+    if curl -sS --fail "$REPO_URL/vesktop/settings.json" -o "$CONFIG_DIR/vesktop/settings.json"; then
+        print_success "Vesktop settings installed."
+    else
+        print_error "Failed to download Vesktop settings."
+        return 1
+    fi
+
     # Dark theme for GTK and Electron apps (stored in dconf, so not a file here)
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
     gsettings set org.gnome.desktop.interface accent-color 'orange'

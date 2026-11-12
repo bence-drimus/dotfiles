@@ -282,7 +282,18 @@ local closeWindowBind = hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.window.close()
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
+-- Like i3 resize mode: Mod+R, then arrows or hjkl resize; Escape, Return or Mod+R leave
+hl.bind(mainMod .. " + R", hl.dsp.submap("resize"))
+hl.define_submap("resize", function()
+    for _, k in ipairs({ { "left", "H", -20, 0 }, { "right", "L", 20, 0 }, { "up", "K", 0, -20 }, { "down", "J", 0, 20 } }) do
+        for i = 1, 2 do
+            hl.bind(k[i], hl.dsp.window.resize({ x = k[3], y = k[4], relative = true }), { repeating = true })
+        end
+    end
+    for _, key in ipairs({ "escape", "Return", mainMod .. " + R" }) do
+        hl.bind(key, hl.dsp.submap("reset"))
+    end
+end)
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(menu))  -- like Spotlight
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())

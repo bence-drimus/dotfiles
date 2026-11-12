@@ -30,6 +30,9 @@ for app in waybar wofi; do
 done
 pkill -USR2 -x waybar
 
+# hyprlock reads its colours each time it starts
+ln -sfn "$HOME/Prog/dotfiles/hyprland/hyprlock-colours-$mode.conf" "$HOME/.config/hypr/hyprlock-colours.conf"
+
 # alacritty watches its config and reloads the colours itself
 ln -sfn "$HOME/Prog/dotfiles/alacritty/colours-$mode.toml" "$HOME/.config/alacritty/colours.toml"
 

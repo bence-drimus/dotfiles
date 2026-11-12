@@ -46,6 +46,18 @@ install_configs() {
         return 1
     fi
 
+    # Hyprland and lock screen (local.lua stays per machine, so it is not here)
+    mkdir -p "$CONFIG_DIR/hypr"
+    for f in hyprland.lua hyprlock.conf; do
+        if ! curl -sS --fail "$REPO_URL/hyprland/$f" -o "$CONFIG_DIR/hypr/$f"; then
+            print_error "Failed to download $f."
+            return 1
+        fi
+    done
+    # Starts dark like the theme below; darkman repoints it at sunrise and sunset
+    ln -sfn "$HOME/Prog/dotfiles/hyprland/hyprlock-colours-dark.conf" "$CONFIG_DIR/hypr/hyprlock-colours.conf"
+    print_success "Hyprland config installed."
+
     # Dark theme for GTK and Electron apps (stored in dconf, so not a file here)
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
     gsettings set org.gnome.desktop.interface accent-color 'orange'

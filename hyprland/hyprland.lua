@@ -286,6 +286,7 @@ hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(menu))  -- like Spotlight
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
+hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd("pidof hyprlock || hyprlock"))
 -- Tiled windows on a workspace in screen order (left to right, then top to bottom)
 local function in_screen_order(workspace, keep)
     local wins = {}

@@ -322,6 +322,8 @@ local function tab_workspace()
     for i = 2, #wins do group:add(wins[i]) end
     hl.dispatch(hl.dsp.focus({ window = active })) -- keep the window you were on as the visible tab
 end
+-- The tab bar fills the top gap instead of adding to it, so tabbing doesn't push the window down
+local tabbed_gaps = hl.workspace_rule({ workspace = "w[g1]", gaps_out = { top = 0, right = 20, bottom = 20, left = 20 } })
 -- Untab back into screen order matching the tab order
 local function untab_group(active)
     local order, member = {}, {}
@@ -329,6 +331,9 @@ local function untab_group(active)
         table.insert(order, w)
         member[w.address] = true
     end
+    -- Hyprland lays out the ungrouped windows before it notices the group is gone, so switch
+    -- the tabbed gap off first or the windows jump up to the top and back down
+    tabbed_gaps:set_enabled(false)
     hl.dispatch(hl.dsp.group.toggle())
     -- where ungrouped windows land depends on focus and the cursor, so swap them into tab order
     for i, want in ipairs(order) do
@@ -338,6 +343,7 @@ local function untab_group(active)
             hl.dispatch(hl.dsp.window.swap({ target = "address:" .. now.address }))
         end
     end
+    tabbed_gaps:set_enabled(true)
     hl.dispatch(hl.dsp.focus({ window = active }))
 end
 hl.bind(mainMod .. " + W", tab_workspace)
@@ -349,11 +355,20 @@ hl.bind(mainMod .. " + E", function()
 end)
 hl.config({ binds = { movefocus_cycles_groupfirst = true } })  -- focus keys walk tabs first
 hl.config({ group = {
-    col = { border_active = "rgba(fe8019ee)", border_inactive = "rgba(504945aa)" },
+    col = { border_active = "rgba(d65d0e99)", border_inactive = "rgba(50494566)" },  -- same as ungrouped windows
+    -- macOS-style tabs: filled rounded pills, the active one lighter with a bolder title, no underline
     groupbar = {
-        font_size = 10, height = 18,  -- bigger tab titles
-        text_color = light and "rgba(323236ff)" or "rgba(ebdbb2ff)",  -- tab titles sit on the desktop colour
-        col = { active = "rgba(d65d0eee)", inactive = "rgba(3c3836ee)" },
+        font_family = "Adwaita Sans", font_size = 11, height = 18,  -- 18 + gaps_out 2 = general gaps_out 20, see the w[g1] rule
+        font_weight_active = "semibold", font_weight_inactive = "normal",
+        gradients = true, indicator_height = 0,
+        gradient_rounding = 8, gradient_round_only_edges = false,
+        gaps_in = 4, gaps_out = 2, keep_upper_gap = false,  -- tabs sit right on top of the window
+        text_color          = light and "rgba(323236ff)" or "rgba(ebdbb2ff)",
+        text_color_inactive = light and "rgba(77767bff)" or "rgba(a89984ff)",
+        col = {
+            active   = light and "rgba(fafafaff)" or "rgba(504945ff)",
+            inactive = light and "rgba(d8d7d4ff)" or "rgba(3c3836ff)",
+        },
     },
 } })
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))  -- like i3 $mod+f

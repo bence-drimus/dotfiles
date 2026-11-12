@@ -19,6 +19,7 @@
     "modules-right": [
         "idle_inhibitor",
         "pulseaudio",
+        "pulseaudio#mic",
         "network",
         "power-profiles-daemon",
         "cpu",
@@ -189,13 +190,12 @@
         "on-click": "blueman-manager"
     },
     "pulseaudio": {
+        "states": { "normal": 100, "over": 150 }, // a state applies at or below its number, so "over" means above 100% and shows red
         // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
-        "format-source-muted": "",
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon}",
+        "format-bluetooth-muted": " {icon}",
+        "format-muted": "",
         "format-icons": {
             "headphone": "",
             "hands-free": "",
@@ -205,6 +205,14 @@
             "car": "",
             "default": ["", "", ""]
         },
+        "on-click": "pavucontrol"
+    },
+    "pulseaudio#mic": {
+        // the mic on its own, so the volume's over-100 colour does not spread to it
+        "format": "{format_source}",
+        "format-muted": "{format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
         "on-click": "pavucontrol"
     },
     "custom/media-now": {

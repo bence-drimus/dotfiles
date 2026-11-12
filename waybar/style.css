@@ -139,6 +139,17 @@ menuitem:hover {
     margin-right: 6px;
 }
 
+/* volume and mic are two modules; keep them as close as when they were one */
+#pulseaudio {
+    padding-right: 2px;
+}
+
+#pulseaudio.mic {
+    margin-left: 0;
+    padding-left: 2px;
+    padding-right: 8px;
+}
+
 #custom-media-now {
     /* fixed width so the scrolling 20-character window (media.py) does not resize the bar */
     min-width: 150px;
@@ -157,6 +168,7 @@ menuitem:hover {
 }
 
 #battery.critical:not(.charging),
+#pulseaudio.over,
 #network.disconnected,
 #temperature.critical {
     color: @red;

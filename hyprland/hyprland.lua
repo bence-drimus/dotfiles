@@ -411,7 +411,21 @@ hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Laptop multimedia keys for volume and LCD brightness
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
+-- Volume up stops at 100%; a fresh press at 100% or more goes on to 150%, so going
+-- past 100 always takes a deliberate second press
+local volume_limit = nil -- set for the length of one key hold
+local function volume_up()
+    if not volume_limit then
+        local p = io.popen("wpctl get-volume @DEFAULT_AUDIO_SINK@")
+        local vol = tonumber(p:read("a"):match("[%d.]+")) or 0
+        p:close()
+        volume_limit = vol >= 1 and 1.5 or 1
+    end
+    hl.dispatch(hl.dsp.exec_cmd("wpctl set-volume -l " .. volume_limit .. " @DEFAULT_AUDIO_SINK@ 5%+"))
+end
+local function volume_up_released() volume_limit = nil end
+hl.bind("XF86AudioRaiseVolume", volume_up,          { locked = true, repeating = true })
+hl.bind("XF86AudioRaiseVolume", volume_up_released, { locked = true, release = true })
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true, repeating = true })
 hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),     { locked = true, repeating = true })
 hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),   { locked = true, repeating = true })

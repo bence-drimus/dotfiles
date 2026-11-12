@@ -1,0 +1,45 @@
+# macOS-style notifications to match wofi and the window tabs. Colours live in
+# dunstrc.d/colours.conf, which darkman links to colours-dark.conf or colours-light.conf
+
+[global]
+    origin = top-right
+    offset = (20, 20)  # lines up with the window gaps, below waybar
+    width = 360
+    height = (0, 200)
+    notification_limit = 5
+
+    corner_radius = 14
+    frame_width = 1
+    gap_size = 8
+    padding = 12
+    horizontal_padding = 14
+    text_icon_padding = 12
+
+    font = Inter 11
+    format = "<b>%s</b>\n%b"
+    markup = full
+    alignment = left
+    vertical_alignment = center
+    ellipsize = end
+    show_age_threshold = 60
+
+    icon_position = left
+    enable_recursive_icon_lookup = true  # icon_theme is set per mode in the colours file
+    min_icon_size = 32
+    max_icon_size = 40
+
+    progress_bar_corner_radius = 4
+    progress_bar_frame_width = 0
+
+    mouse_left_click = do_action, close_current
+    mouse_middle_click = close_all
+    mouse_right_click = close_current
+
+[urgency_low]
+    timeout = 5
+
+[urgency_normal]
+    timeout = 8
+
+[urgency_critical]
+    timeout = 0

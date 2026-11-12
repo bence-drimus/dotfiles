@@ -36,6 +36,10 @@ ln -sfn "$HOME/Prog/dotfiles/hyprland/hyprlock-colours-$mode.conf" "$HOME/.confi
 # alacritty watches its config and reloads the colours itself
 ln -sfn "$HOME/Prog/dotfiles/alacritty/colours-$mode.toml" "$HOME/.config/alacritty/colours.toml"
 
+mkdir -p "$HOME/.config/dunst/dunstrc.d"
+ln -sfn "$HOME/Prog/dotfiles/dunst/colours-$mode.conf" "$HOME/.config/dunst/dunstrc.d/colours.conf"
+dunstctl reload 2>/dev/null
+
 # hyprland.lua reads color-scheme to pick its background colour
 hyprctl reload >/dev/null
 

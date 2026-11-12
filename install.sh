@@ -73,6 +73,22 @@ install_configs() {
         return 1
     fi
 
+    # The rest are links into a clone of this repo, so edits there apply straight away
+    [ -d "$HOME/Prog/dotfiles" ] || git clone https://github.com/bence-drimus/dotfiles.git "$HOME/Prog/dotfiles"
+    for f in alacritty/alacritty.toml fontconfig/fonts.conf gtk-3.0/settings.ini gtk-4.0/settings.ini \
+             kitty/kitty.conf kitty/dark-theme.auto.conf kitty/light-theme.auto.conf \
+             waybar/config.jsonc waybar/style.css waybar/media.py waybar/power_menu.xml \
+             wofi/config wofi/style.css; do
+        mkdir -p "$CONFIG_DIR/$(dirname "$f")"
+        ln -sfn "$HOME/Prog/dotfiles/$f" "$CONFIG_DIR/$f"
+    done
+    # Colours start dark; darkman switches them at sunrise and sunset
+    ln -sfn "$HOME/Prog/dotfiles/alacritty/colours-dark.toml" "$CONFIG_DIR/alacritty/colours.toml"
+    for app in waybar wofi; do
+        ln -sfn "$HOME/Prog/dotfiles/theme/colours-dark.css" "$CONFIG_DIR/$app/colours.css"
+    done
+    print_success "Alacritty, kitty, fonts, GTK, waybar and wofi configs linked."
+
     # Dark theme for GTK and Electron apps (stored in dconf, so not a file here)
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
     gsettings set org.gnome.desktop.interface accent-color 'orange'

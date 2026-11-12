@@ -21,9 +21,29 @@ grim
 slurp
 wl-clipboard
 
+# --- Hyprland desktop ---
+hyprland
+hyprlock
+waybar
+wofi
+dunst
+libnotify
+dolphin
+kitty
+adwaita-fonts
+
+# --- Bar and media keys (waybar clicks, volume, brightness) ---
+wireplumber
+pavucontrol
+blueman
+playerctl
+brightnessctl
+power-profiles-daemon
+python
+
 # --- Theme (Gruvbox, macOS-style, day/night) ---
 alacritty
 inter-font
 hyprsunset
 darkman
-# From the AUR, install with: paru -S colloid-gruvbox-gtk-theme-git whitesur-icon-theme apple_cursor
+# From the AUR, install with: paru -S colloid-gruvbox-gtk-theme-git whitesur-icon-theme apple_cursor vesktop-bin

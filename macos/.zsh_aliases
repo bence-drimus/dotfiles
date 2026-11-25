@@ -1,0 +1,2 @@
+# agent view scoped to the current project
+alias ca='claude agents --cwd .'

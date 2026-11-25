@@ -1,10 +1,46 @@
-#!/bin/sh
-# Open new Ghostty window. If app running, reuse via cmd+N (warm).
-# Else cold-launch with home dir.
+#!/usr/bin/env bash
+# Open a new Ghostty window on the user's currently focused aerospace
+# workspace, reusing the existing Ghostty process if one is running.
+#
+# Problem this solves: aerospace's default `open -na Ghostty` spawns a new
+# process per press. Reusing via `Cmd+N` works but macOS activates Ghostty,
+# yanking aerospace focus to whichever workspace already hosts a Ghostty
+# window. We save the focused workspace first, then move the new window
+# back and restore focus.
+
+set -euo pipefail
+
+AS=/opt/homebrew/bin/aerospace
+BUNDLE_ID=com.mitchellh.ghostty
+
+orig_ws="$("$AS" list-workspaces --focused)"
+
+snapshot_ids() {
+  "$AS" list-windows --monitor all --app-bundle-id "$BUNDLE_ID" \
+    --format '%{window-id}' 2>/dev/null | sort -u || true
+}
+
+pre="$(snapshot_ids)"
+
 if pgrep -xi ghostty > /dev/null 2>&1; then
   osascript \
     -e 'tell application "Ghostty" to activate' \
-    -e 'tell application "System Events" to keystroke "n" using command down'
+    -e 'tell application "System Events" to keystroke "n" using command down' \
+    > /dev/null
 else
-  open -a Ghostty --args --working-directory="$HOME"
+  open -a Ghostty
 fi
+
+new_id=""
+for _ in $(seq 1 20); do
+  sleep 0.1
+  cur="$(snapshot_ids)"
+  new_id="$(comm -13 <(printf '%s\n' "$pre") <(printf '%s\n' "$cur") | head -n1)"
+  [ -n "$new_id" ] && break
+done
+
+[ -z "$new_id" ] && exit 0
+
+"$AS" move-node-to-workspace --window-id "$new_id" "$orig_ws" || true
+"$AS" workspace "$orig_ws" || true
+"$AS" focus --window-id "$new_id" || true
